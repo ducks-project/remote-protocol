@@ -181,7 +181,7 @@ namespace Ducks\Component\RemoteProtocol {
          */
         public function downloadFile( $file, $local ) {
             if (!is_string($file)) {
-                throw new \UnexpectedValueException($dir.' must be an instance of string, '.gettype($file).' given.');
+                throw new \UnexpectedValueException($file.' must be an instance of string, '.gettype($file).' given.');
             }
             $info = pathinfo($file);
             $filename = $info['basename'];

@@ -1,7 +1,7 @@
 {
     "name": "ducks-project/remote-protocol",
     "description": "Manage some remote protocole like SFTP (Currently the only one)",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "type": "library",
     "keywords": ["Remote", "Protocol", "sftp", "ftp", "ssl", "ssh2"],
     "homepage": "https://github.com/ducks-project/remote-protocol/",
