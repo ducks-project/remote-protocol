@@ -50,8 +50,12 @@ namespace Ducks\Component\RemoteProtocol {
          */
         protected function parseRawList($dir) {
             $items = array();
-            $list = ftp_nlist($this->connection, $dir) or return false;
-            $rawList = ftp_rawlist($this->connection, $dir) or return false;
+            if (!($list = ftp_nlist($this->connection, $dir))) {
+                return false;
+            }
+            if (!($rawList = ftp_rawlist($this->connection, $dir))) {
+                return false;
+            }
             if (count($list) == count($rawList)) {
                 foreach ($rawList as $index => $child) {
                     $item = array();
@@ -81,7 +85,7 @@ namespace Ducks\Component\RemoteProtocol {
             if (!$this->connection = ftp_connect($this->host, $this->port, $this->timeout)) {
                 throw new \RuntimeException('Could not connect to FtpProtocol remote: '.$this->host.':'.$this->port);
             }
-            ftp_pasv($this->conn_id, true);
+            ftp_pasv($this->connection, true);
             return $this;
         }
 
@@ -94,6 +98,7 @@ namespace Ducks\Component\RemoteProtocol {
          * @param array $params keys should be : login/password/timeout
          */
         public function __construct( $host, $port, array $params=array(), array $methods=null, array $callbacks=null ) {
+            $this->timeout = 90;
             $this->setHost($host);
             $this->setPort($port);
             $this->init($params);
