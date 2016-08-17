@@ -85,7 +85,6 @@ namespace Ducks\Component\RemoteProtocol {
             if (!$this->connection = ftp_connect($this->host, $this->port, $this->timeout)) {
                 throw new \RuntimeException('Could not connect to FtpProtocol remote: '.$this->host.':'.$this->port);
             }
-            ftp_pasv($this->connection, true);
             return $this;
         }
 
@@ -114,6 +113,7 @@ namespace Ducks\Component\RemoteProtocol {
             if (!ftp_login($this->connection, $this->login, $this->password)) {
                 throw new \RuntimeException('Could not authenticated FtpProtocol connection with login and password');
             }
+            ftp_pasv($this->connection, true);
             return $this;
         }
 
